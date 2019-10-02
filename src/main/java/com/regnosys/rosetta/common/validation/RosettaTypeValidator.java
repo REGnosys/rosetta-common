@@ -48,7 +48,7 @@ public class RosettaTypeValidator  implements PostProcessStep, ModelObjectValida
 				AttributeMeta... metas) {
 			if (builder==null) return false;
 			RosettaMetaData<? extends RosettaModelObject> metaData = builder.metaData();
-			List<ValidationResult<?>> validationResults = result.getValidationResults();
+			List<ValidationResult> validationResults = result.getValidationResults();
 			metaData.dataRules().forEach(dr->validationResults.add(dr.validate(path, builder)));
 			metaData.choiceRuleValidators().forEach(dr->validationResults.add(dr.validate(path, builder)));
 			if (metaData.validator()!=null) validationResults.add(metaData.validator().validate(path, builder));
@@ -114,7 +114,7 @@ public class RosettaTypeValidator  implements PostProcessStep, ModelObjectValida
 		}
 	}
 	
-	private <T extends RosettaModelObject> void validateAndCollectErrors(Class<T> topClass, T modelObject, Consumer<? super ValidationResult<?>> collector) {
+	private <T extends RosettaModelObject> void validateAndCollectErrors(Class<T> topClass, T modelObject, Consumer<? super ValidationResult> collector) {
 		runProcessStep(topClass, modelObject.toBuilder())
 			.getValidationResults()
 			.stream().filter((res)-> { return !res.isSuccess();})

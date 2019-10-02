@@ -19,13 +19,13 @@ public class ValidationReport implements PostProcessorReport, BuilderProcessor.R
 	private static final Logger LOGGER = LoggerFactory.getLogger(ValidationReport.class);
 
 	@JsonProperty
-	private final List<ValidationResult<?>> validationResults;
+	private final List<ValidationResult> validationResults;
 	@JsonIgnore
 	private final RosettaModelObjectBuilder resultObject;
 
-	public ValidationReport(RosettaModelObjectBuilder resultObject, List<ValidationResult<?>> validationResults) {
+	public ValidationReport(RosettaModelObjectBuilder resultObject, List<ValidationResult> validationResults) {
 		this.resultObject = resultObject;
-		validationResults.sort(Comparator.comparing(ValidationResult::isSuccess, Boolean::compare));
+		validationResults.sort(Comparator.comparing(t -> !t.isSuccess(), Boolean::compare));
 		this.validationResults = validationResults;
 	}
 
@@ -34,16 +34,16 @@ public class ValidationReport implements PostProcessorReport, BuilderProcessor.R
 		return !failure();
 	}
 
-	public List<ValidationResult<?>> validationFailures() {
-		return validationResults.stream().filter(ValidationResult::isSuccess).collect(Collectors.toList());
+	public List<ValidationResult> validationFailures() {
+		return validationResults.stream().filter(t -> !t.isSuccess()).collect(Collectors.toList());
 	}
 
-	public List<ValidationResult<?>> results() {
+	public List<ValidationResult> results() {
 		return validationResults;
 	}
 
 	public void logReport() {
-		for (ValidationResult<?> validationResult : validationResults) {
+		for (ValidationResult validationResult : validationResults) {
 			if (!validationResult.isSuccess()) {
 				LOGGER.error(validationResult.toString());
 			} else {
@@ -53,12 +53,12 @@ public class ValidationReport implements PostProcessorReport, BuilderProcessor.R
 	}
 
 	private boolean failure() {
-		List<ValidationResult<?>> res = validationResults.stream().filter(result -> !result.isSuccess())
+		List<ValidationResult> res = validationResults.stream().filter(result -> !result.isSuccess())
 				.collect(Collectors.toList());
 		return !res.isEmpty();
 	}
 
-	public List<ValidationResult<?>> getValidationResults() {
+	public List<ValidationResult> getValidationResults() {
 		return validationResults;
 	}
 
