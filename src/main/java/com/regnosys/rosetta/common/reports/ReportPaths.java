@@ -1,39 +1,38 @@
 package com.regnosys.rosetta.common.reports;
 
-import com.regnosys.rosetta.common.RegPaths;
+import com.regnosys.rosetta.common.Paths;
 import com.rosetta.model.lib.ModelReportId;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
-public class RegReportPaths extends RegPaths {
+public class ReportPaths extends Paths {
 
-    public static final Path REGULATORY_REPORTING_PATH = Paths.get("regulatory-reporting");
+    public static final Path REGULATORY_REPORTING_PATH = java.nio.file.Paths.get("regulatory-reporting");
     public static final String REPORT_EXPECTATIONS_FILE_NAME = "report-expectations.json";
 
 
-    public static RegReportPaths get(Path resourcesPath) {
+    public static ReportPaths get(Path resourcesPath) {
         return Files.exists(resourcesPath.resolve(REGULATORY_REPORTING_PATH).resolve(INPUT_PATH)) ?
-                RegReportPaths.getDefault() : RegReportPaths.getLegacy();
+                ReportPaths.getDefault() : ReportPaths.getLegacy();
     }
 
-    public static RegReportPaths getDefault() {
+    public static ReportPaths getDefault() {
         Path rootPath = REGULATORY_REPORTING_PATH;
-        return new RegReportPaths(rootPath,
+        return new ReportPaths(rootPath,
                 rootPath.resolve(INPUT_PATH),
                 rootPath.resolve(OUTPUT_PATH),
                 rootPath.resolve(CONFIG_PATH),
                 rootPath.resolve(LOOKUP_PATH));
     }
 
-    public static RegReportPaths getLegacy() {
+    public static ReportPaths getLegacy() {
         Path dataPath = REGULATORY_REPORTING_PATH.resolve(LEGACY_DATA_PATH);
         Path lookup = REGULATORY_REPORTING_PATH.resolve(LOOKUP_PATH);
-        return new RegReportPaths(dataPath, dataPath, dataPath, dataPath, lookup);
+        return new ReportPaths(dataPath, dataPath, dataPath, dataPath, lookup);
     }
 
-    public RegReportPaths(Path rootPath, Path input, Path output, Path config, Path lookup) {
+    public ReportPaths(Path rootPath, Path input, Path output, Path config, Path lookup) {
         super(rootPath, input, output, config, lookup);
     }
 

@@ -3,7 +3,6 @@ package com.regnosys.rosetta.common.serialisation.reportdata;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.google.common.io.Resources;
-import com.regnosys.rosetta.common.reports.RegReportIdentifier;
 import com.regnosys.rosetta.common.serialisation.RosettaObjectMapper;
 import com.rosetta.model.lib.ModelReportId;
 import org.junit.jupiter.api.Test;
@@ -16,8 +15,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
-import static com.regnosys.rosetta.common.reports.RegReportPaths.CONFIG_PATH;
-import static com.regnosys.rosetta.common.reports.RegReportPaths.OUTPUT_PATH;
+import static com.regnosys.rosetta.common.reports.ReportPaths.CONFIG_PATH;
+import static com.regnosys.rosetta.common.reports.ReportPaths.OUTPUT_PATH;
 import static org.junit.jupiter.api.Assertions.*;
 
 class JsonExpectedResultLoaderTest {

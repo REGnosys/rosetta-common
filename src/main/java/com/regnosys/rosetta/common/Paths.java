@@ -1,21 +1,18 @@
 package com.regnosys.rosetta.common;
 
-import com.regnosys.rosetta.common.reports.RegReportPaths;
 import com.rosetta.model.lib.ModelReportId;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
-public class RegPaths {
+public class Paths {
 
-    public static final Path INPUT_PATH = Paths.get("input");
-    public static final Path OUTPUT_PATH = Paths.get("output");
-    public static final Path CONFIG_PATH = Paths.get("config");
-    public static final Path LOOKUP_PATH = Paths.get("lookup");
+    public static final Path INPUT_PATH = java.nio.file.Paths.get("input");
+    public static final Path OUTPUT_PATH = java.nio.file.Paths.get("output");
+    public static final Path CONFIG_PATH = java.nio.file.Paths.get("config");
+    public static final Path LOOKUP_PATH = java.nio.file.Paths.get("lookup");
 
     // Legacy folder structure
-    public static final Path LEGACY_DATA_PATH = Paths.get("data");
+    public static final Path LEGACY_DATA_PATH = java.nio.file.Paths.get("data");
     public static final String KEY_VALUE_FILE_NAME_SUFFIX = "-key-value.json";
     public static final String REPORT_FILE_NAME_SUFFIX = "-report.json";
     private final Path rootPath;
@@ -24,7 +21,7 @@ public class RegPaths {
     private final Path config;
     private final Path lookup;
 
-    public RegPaths(Path rootPath, Path input, Path output, Path config, Path lookup) {
+    public Paths(Path rootPath, Path input, Path output, Path config, Path lookup) {
         this.rootPath = rootPath;
         this.config = config;
         this.input = input;

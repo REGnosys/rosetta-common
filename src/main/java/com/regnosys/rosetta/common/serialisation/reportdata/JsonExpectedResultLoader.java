@@ -1,7 +1,7 @@
 package com.regnosys.rosetta.common.serialisation.reportdata;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.regnosys.rosetta.common.reports.RegReportPaths;
+import com.regnosys.rosetta.common.reports.ReportPaths;
 import com.regnosys.rosetta.common.serialisation.InputDataLoader;
 import com.regnosys.rosetta.common.util.UrlUtils;
 import com.rosetta.model.lib.ModelReportId;
@@ -49,12 +49,12 @@ public class JsonExpectedResultLoader implements InputDataLoader<ReportIdentifie
             Path inputFileName = Paths.get(String.valueOf(data.getInput()));
 
             URL keyValueExpectationUrl = null;
-            Path keyValueExpectationPath = RegReportPaths
+            Path keyValueExpectationPath = ReportPaths
                     .getKeyValueExpectationFilePath(UrlUtils.toPath(outputPath), reportIdentifier, dataSetName, inputFileName);
             if (Files.exists(keyValueExpectationPath)) {
                 keyValueExpectationUrl = UrlUtils.toUrl(keyValueExpectationPath);
             } else {
-                Path legacyKeyValueExpectationPath = RegReportPaths
+                Path legacyKeyValueExpectationPath = ReportPaths
                         .getLegacyKeyValueExpectationFilePath(UrlUtils.toPath(outputPath), reportIdentifier, dataSetName, inputFileName);
                 if (Files.exists(legacyKeyValueExpectationPath)) {
                     keyValueExpectationUrl = UrlUtils.toUrl(legacyKeyValueExpectationPath);
